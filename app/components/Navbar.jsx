@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from './ui/Button';
 import Icon from './ui/Icon';
+import AuthModal from './ui/AuthModal';
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const router = useRouter();
 
   const handleSearch = (e) => {
@@ -17,6 +19,11 @@ export default function Navbar() {
         router.push(`/search-results?q=${encodeURIComponent(query)}`);
       }
     }
+  };
+
+  const openAuth = () => {
+    setIsMenuOpen(false);
+    setIsAuthOpen(true);
   };
 
   return (
@@ -48,16 +55,16 @@ export default function Navbar() {
             <div className="hidden md:flex items-center gap-4">
               {!isLoggedIn ? (
                 <div className="flex items-center gap-2 md:gap-4">
-                  <Button onClick={() => setIsLoggedIn(true)} variant="ghost" size="sm" className="px-2 md:px-4 text-xs md:text-sm">
+                  <Button onClick={openAuth} variant="ghost" size="sm" className="px-2 md:px-4 text-xs md:text-sm">
                     Login
                   </Button>
-                  <Button onClick={() => setIsLoggedIn(true)} variant="primary" size="sm" className="md:px-6 md:py-2.5 text-xs md:text-sm px-3 py-1.5">
+                  <Button onClick={openAuth} variant="primary" size="sm" className="md:px-6 md:py-2.5 text-xs md:text-sm px-3 py-1.5">
                     Sign Up
                   </Button>
                 </div>
               ) : (
                 <div className="flex items-center gap-4 md:gap-6">
-                  <button className="p-1.5 md:p-2 rounded-full hover:bg-surface-variant transition-colors duration-200 text-text-secondary hover:text-text-primary relative active:scale-95 transition-transform">
+                  <button className="p-1.5 md:p-2 rounded-full hover:bg-surface-variant transition-colors duration-200 text-text-secondary hover:text-text-primary relative active:scale-95">
                     <Icon name="notifications" />
                     <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-error rounded-full border border-white"></span>
                   </button>
@@ -86,13 +93,11 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Sidebar Menu */}
-      {/* Overlay */}
       <div 
         className={`fixed inset-0 bg-black/40 z-[60] transition-opacity duration-300 md:hidden ${isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={() => setIsMenuOpen(false)}
       />
       
-      {/* Sidebar - Does not take full screen (width: 280px) */}
       <div 
         className={`fixed top-0 right-0 h-full w-[80vw] max-w-[280px] bg-white z-[70] shadow-2xl transition-transform duration-300 md:hidden flex flex-col ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
@@ -124,7 +129,7 @@ export default function Navbar() {
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Account</p>
               {!isLoggedIn ? (
                 <div className="grid grid-cols-1 gap-3">
-                  <Button onClick={() => { setIsLoggedIn(true); setIsMenuOpen(false); }} variant="primary" size="md" className="w-full justify-center">
+                  <Button onClick={openAuth} variant="primary" size="md" className="w-full justify-center">
                     Sign Up / Login
                   </Button>
                 </div>
@@ -172,6 +177,13 @@ export default function Navbar() {
            </button>
         </div>
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onSuccess={() => setIsLoggedIn(true)}
+      />
     </>
   );
 }
