@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Icon from './ui/Icon';
 
 export default function TopServices() {
@@ -10,9 +11,9 @@ export default function TopServices() {
           <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-1 md:mb-2">Top Services</h2>
           <p className="text-gray-500 text-xs md:text-sm">Curated experts for your everyday needs</p>
         </div>
-        <a href="#" className="text-primary text-xs md:text-sm font-semibold hover:underline flex items-center gap-1 whitespace-nowrap shrink-0 pb-1">
+        <Link href="/search" className="text-primary text-xs md:text-sm font-semibold hover:underline flex items-center gap-1 whitespace-nowrap shrink-0 pb-1">
           See all <Icon name="arrow_forward" className="text-sm md:text-base" />
-        </a>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">

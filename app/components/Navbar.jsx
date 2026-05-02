@@ -1,18 +1,33 @@
 'use client';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Button from './ui/Button';
 import Icon from './ui/Icon';
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const handleSearch = (e) => {
+    if (e.key === 'Enter') {
+      const query = e.target.value.trim();
+      if (query) {
+        setIsMenuOpen(false);
+        router.push(`/search-results?q=${encodeURIComponent(query)}`);
+      }
+    }
+  };
 
   return (
     <>
       <nav className="bg-surface-primary fixed top-0 w-full z-50 border-b border-surface-variant transition-all duration-300">
         <div className="flex items-center justify-between px-4 md:px-8 py-3 md:py-4 max-w-[1200px] mx-auto gap-2">
           {/* Brand Logo */}
-          <div className="text-lg md:text-xl font-bold tracking-tighter text-text-primary flex-shrink-0 cursor-pointer">
+          <div 
+            onClick={() => router.push('/')}
+            className="text-lg md:text-xl font-bold tracking-tighter text-text-primary flex-shrink-0 cursor-pointer"
+          >
             Urban Company
           </div>
 
@@ -25,6 +40,7 @@ export default function Navbar() {
                 className="pl-9 pr-4 py-2.5 bg-surface-secondary border-none rounded-full focus:bg-surface-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-text-primary placeholder-text-secondary w-[280px] transition-all duration-200 text-sm"
                 placeholder="Search for services"
                 type="text"
+                onKeyDown={handleSearch}
               />
             </div>
 
@@ -78,7 +94,7 @@ export default function Navbar() {
       
       {/* Sidebar - Does not take full screen (width: 280px) */}
       <div 
-        className={`fixed top-0 right-0 h-full w-[280px] bg-white z-[70] shadow-2xl transition-transform duration-300 md:hidden flex flex-col ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed top-0 right-0 h-full w-[80vw] max-w-[280px] bg-white z-[70] shadow-2xl transition-transform duration-300 md:hidden flex flex-col ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex items-center justify-between p-5 border-b border-gray-100">
           <span className="font-bold text-gray-900">Menu</span>
@@ -99,6 +115,7 @@ export default function Navbar() {
                 className="w-full pl-9 pr-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none text-sm"
                 placeholder="Search services"
                 type="text"
+                onKeyDown={handleSearch}
               />
             </div>
 

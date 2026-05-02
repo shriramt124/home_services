@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Button from './ui/Button';
 import Icon from './ui/Icon';
 
+import Link from 'next/link';
+
 export default function Hero() {
   return (
     <section className="max-w-[1200px] mx-auto px-4 md:px-8 pt-8 md:pt-16 pb-12 md:pb-24">
@@ -22,9 +24,11 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-wrap items-center gap-3 md:gap-4 pt-2 md:pt-4">
-            <Button variant="primary" size="lg" className="bg-[#125BCE]">
-              Book Service
-            </Button>
+            <Link href="/search">
+              <Button variant="primary" size="lg" className="bg-[#125BCE]">
+                Book Service
+              </Button>
+            </Link>
             <Button variant="secondary" size="lg">
               Shop Materials
             </Button>
