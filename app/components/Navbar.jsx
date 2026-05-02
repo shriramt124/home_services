@@ -4,11 +4,13 @@ import { useRouter } from 'next/navigation';
 import Button from './ui/Button';
 import Icon from './ui/Icon';
 import AuthModal from './ui/AuthModal';
+import CartDrawer from './ui/CartDrawer';
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const router = useRouter();
 
   const handleSearch = (e) => {
@@ -24,6 +26,14 @@ export default function Navbar() {
   const openAuth = () => {
     setIsMenuOpen(false);
     setIsAuthOpen(true);
+  };
+
+  const handleCartClick = () => {
+    if (isLoggedIn) {
+      setIsCartOpen(true);
+    } else {
+      openAuth();
+    }
   };
 
   return (
@@ -53,6 +63,18 @@ export default function Navbar() {
 
             {/* Desktop Actions */}
             <div className="hidden md:flex items-center gap-4">
+              
+              {/* Desktop Cart Icon */}
+              {isLoggedIn && (
+                <button 
+                  onClick={() => setIsCartOpen(true)}
+                  className="p-1.5 md:p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-500 hover:text-gray-900 active:scale-95 relative"
+                >
+                  <Icon name="shopping_cart" />
+                  <span className="absolute top-1 right-1 w-4 h-4 bg-[#5952e4] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">2</span>
+                </button>
+              )}
+
               {!isLoggedIn ? (
                 <div className="flex items-center gap-2 md:gap-4">
                   <Button onClick={openAuth} variant="ghost" size="sm" className="px-2 md:px-4 text-xs md:text-sm">
@@ -81,13 +103,24 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Hamburger Button - Visible only on small screens */}
-            <button 
-              onClick={() => setIsMenuOpen(true)}
-              className="md:hidden p-2 rounded-full hover:bg-surface-variant transition-colors text-text-primary active:scale-90"
-            >
-              <Icon name="menu" className="text-2xl" />
-            </button>
+            {/* Mobile Actions (Cart + Menu) */}
+            <div className="flex items-center gap-1 md:hidden">
+              {isLoggedIn && (
+                <button 
+                  onClick={() => setIsCartOpen(true)}
+                  className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-900 active:scale-90 relative"
+                >
+                  <Icon name="shopping_cart" className="text-xl" />
+                  <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#5952e4] text-white text-[9px] font-bold rounded-full flex items-center justify-center border border-white">2</span>
+                </button>
+              )}
+              <button 
+                onClick={() => setIsMenuOpen(true)}
+                className="p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-900 active:scale-90"
+              >
+                <Icon name="menu" className="text-2xl" />
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -183,6 +216,12 @@ export default function Navbar() {
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
         onSuccess={() => setIsLoggedIn(true)}
+      />
+
+      {/* Cart Drawer */}
+      <CartDrawer 
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
       />
     </>
   );
