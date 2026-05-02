@@ -14,15 +14,15 @@ export default function MostBookedServices() {
   ];
 
   return (
-    <section className="bg-[#fcf8ff] py-16">
-      <div className="max-w-[1200px] mx-auto px-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">Most booked services</h2>
+    <section className="bg-[#fcf8ff] py-8 md:py-16">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-8">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-8">Most booked services</h2>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="relative h-[120px] rounded-xl overflow-hidden group cursor-pointer bg-slate-800 shadow-sm hover:shadow-md transition-shadow"
+              className="relative h-[100px] md:h-[120px] rounded-xl overflow-hidden group cursor-pointer bg-slate-800 shadow-sm hover:shadow-md transition-shadow"
             >
               <Image 
                 src={service.image} 
@@ -32,8 +32,8 @@ export default function MostBookedServices() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 pointer-events-none"></div>
               
-              <div className="absolute bottom-4 left-4 right-4 z-20 pointer-events-none">
-                <h3 className="text-white text-sm font-semibold leading-tight">{service.title}</h3>
+              <div className="absolute bottom-3 left-3 right-3 md:bottom-4 md:left-4 md:right-4 z-20 pointer-events-none">
+                <h3 className="text-white text-xs md:text-sm font-semibold leading-tight">{service.title}</h3>
               </div>
             </div>
           ))}

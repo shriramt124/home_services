@@ -5,23 +5,23 @@ import Icon from './ui/Icon';
 
 export default function Hero() {
   return (
-    <section className="max-w-[1200px] mx-auto px-8 pt-16 pb-24">
-      <div className="flex flex-col md:flex-row items-center gap-12">
+    <section className="max-w-[1200px] mx-auto px-4 md:px-8 pt-8 md:pt-16 pb-12 md:pb-24">
+      <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12">
         {/* Left Column: Content */}
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-4 md:space-y-6">
           <div className="inline-block px-3 py-1 bg-blue-50 text-primary text-xs font-semibold rounded-full uppercase tracking-wider">
             Premium Housekeeping
           </div>
           
-          <h1 className="text-4xl md:text-[48px] leading-tight font-bold text-[#0c1a30] tracking-tight">
+          <h1 className="text-2xl md:text-[48px] leading-tight font-bold text-[#0c1a30] tracking-tight">
             Reliable Housekeeping<br />Services at Your Fingertips
           </h1>
           
-          <p className="text-text-secondary text-lg max-w-md leading-relaxed">
+          <p className="text-text-secondary text-sm md:text-lg max-w-md leading-relaxed">
             Experience the gold standard of professional cleaning. Verified experts, seamless booking, and a spotless home guaranteed, every single time.
           </p>
           
-          <div className="flex items-center gap-4 pt-4">
+          <div className="flex flex-wrap items-center gap-3 md:gap-4 pt-2 md:pt-4">
             <Button variant="primary" size="lg" className="bg-[#125BCE]">
               Book Service
             </Button>
