@@ -1,9 +1,12 @@
 'use client';
 import { useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Icon from './Icon';
 
 export default function CartDrawer({ isOpen, onClose }) {
+  const router = useRouter();
+
   // Lock body scroll when drawer is open
   useEffect(() => {
     if (isOpen) {
@@ -159,7 +162,10 @@ export default function CartDrawer({ isOpen, onClose }) {
             </div>
           </div>
           
-          <button className="w-full bg-[#5952e4] hover:bg-[#4640c4] active:scale-[0.98] text-white font-bold py-3 min-[360px]:py-3.5 rounded-xl text-xs min-[360px]:text-sm transition-all duration-200 flex items-center justify-center gap-2">
+          <button 
+            onClick={() => { onClose(); router.push('/checkout'); }}
+            className="w-full bg-[#5952e4] hover:bg-[#4640c4] active:scale-[0.98] text-white font-bold py-3 min-[360px]:py-3.5 rounded-xl text-xs min-[360px]:text-sm transition-all duration-200 flex items-center justify-center gap-2"
+          >
             Proceed to Checkout
             <Icon name="arrow_forward" className="text-sm min-[360px]:text-base" />
           </button>

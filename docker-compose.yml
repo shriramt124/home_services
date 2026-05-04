@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  urban-app:
+    container_name: a24work_f_cont
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
