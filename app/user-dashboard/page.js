@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import Icon from '../components/ui/Icon';
 import Link from 'next/link';
 
@@ -33,7 +32,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa]">
+    <div className="bg-[#f8f9fa] min-h-screen">
       <Navbar />
 
       <div className="flex pt-20">
@@ -51,7 +50,7 @@ export default function Dashboard() {
             <Link href="/dashboard" className="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-700 rounded-2xl font-medium">
               <Icon name="dashboard" /> Dashboard
             </Link>
-            <Link href="#" className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 rounded-2xl text-gray-700">
+            <Link href="/tracking" className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 rounded-2xl text-gray-700">
               <Icon name="event" /> My Bookings
             </Link>
             <Link href="#" className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 rounded-2xl text-gray-700">
@@ -62,11 +61,9 @@ export default function Dashboard() {
             </Link>
           </nav>
 
-          <div className="absolute bottom-8 left-6 right-6">
-            <div className="text-xs text-gray-400 space-y-2">
-              <a href="#" className="block hover:text-gray-600">Support</a>
-              <a href="#" className="block hover:text-gray-600">Logout</a>
-            </div>
+          <div className="absolute bottom-8 left-6 right-6 text-xs text-gray-400 space-y-2">
+            <a href="#" className="block hover:text-gray-600">Support</a>
+            <a href="#" className="block hover:text-gray-600">Logout</a>
           </div>
         </div>
 
@@ -134,9 +131,7 @@ export default function Dashboard() {
               {recentHistory.map((item, i) => (
                 <div key={i} className="bg-white rounded-2xl p-5 flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center text-2xl">
-                      🛠️
-                    </div>
+                    <div className="w-12 h-12 bg-gray-100 rounded-2xl flex items-center justify-center text-2xl">🛠️</div>
                     <div>
                       <p className="font-medium">{item.title}</p>
                       <p className="text-sm text-gray-500">{item.date}</p>
@@ -153,7 +148,20 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <Footer />
+      {/* Custom Footer for Dashboard only */}
+      <footer className="bg-white border-t mt-12">
+        <div className="max-w-7xl mx-auto px-6 py-8 text-xs text-gray-500">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© 2024 UrbanHome Services Inc. All rights reserved.</p>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-gray-700">Privacy Policy</a>
+              <a href="#" className="hover:text-gray-700">Terms of Service</a>
+              <a href="#" className="hover:text-gray-700">Contact Us</a>
+              <a href="#" className="hover:text-gray-700">Careers</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
